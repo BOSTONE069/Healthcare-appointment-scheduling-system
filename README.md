@@ -116,7 +116,7 @@ A **full-stack web application** built with **Django REST Framework (DRF)** and 
 ## Sequence Diagram
 - A sequence diagram that outlines the interactions between different components of the system.
 <p style="align:center">
-    <img src="out/work/work.png">
+    <img src="out/work/Healthcare Appointment System Architecture.png">
 </p>
 ## ⚙️ Configuration
 

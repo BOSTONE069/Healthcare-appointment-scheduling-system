@@ -1,10 +1,79 @@
-@startuml
-component "Models" as models
-component "Views" as views
-component "Templates" as templates
-component "URLs" as urls
+@startuml Healthcare Appointment System Architecture
 
-models --> views : Query data
-views --> templates : Render
-urls --> views : Route requests
+skinparam monochrome true
+skinparam componentStyle uml2
+
+package "Django Backend" {
+    component "Models" as models {
+        [Patient]
+        [Doctor]
+        [Appointment]
+        [Specialization]
+    }
+
+    component "Serializers" as serializers {
+        [PatientSerializer]
+        [DoctorSerializer]
+        [AppointmentSerializer]
+    }
+
+    component "Views (API)" as views {
+        [UserAPI]
+        [AppointmentAPI]
+        [DoctorAPI]
+    }
+
+    component "Admin" as admin {
+        [AdminPanel]
+    }
+}
+
+package "React Frontend" {
+    component "Services" as services {
+        [AuthService]
+        [AppointmentService]
+        [DoctorService]
+    }
+
+    component "Components" as components {
+        [Login/Register]
+        [Dashboard]
+        [AppointmentForm]
+        [DoctorList]
+    }
+
+    component "State Management" as state {
+        [Redux Store]
+    }
+}
+
+database "PostgreSQL" as db
+queue "Redis" as redis
+
+models --> db : Persists data
+views --> serializers : Validate/Transform
+serializers --> models : Access data
+
+services --> views : API Calls
+components --> services : Consume
+components --> state : Manage UI state
+state --> services : Trigger actions
+
+admin --> models : Manage data
+views --> redis : Cache (optional)
+
+note right of models
+    Core business logic:
+    - Patient/Doctor profiles
+    - Appointment scheduling
+    - Availability management
+end note
+
+note left of components
+    User Interfaces:
+    - Patient portal
+    - Doctor dashboard
+    - Admin views
+end note
+
 @enduml
