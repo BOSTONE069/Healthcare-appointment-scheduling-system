@@ -4,17 +4,17 @@
 
 
 ## API Documentation
-- Provide details about the API endpoints, request/response formats, and authentication methods.
+- Access the documentation through `http://127.0.0.1:8000/swagger/`
 
 ## Database Schema Diagram
-- Include a diagram that illustrates the database schema, showing the relationships between different models.
+- A diagram that illustrates the database schema, showing the relationships between different models.
 
 <p style="align:center">
     <img src="DATABASE SCHEMA.png">
 </p>
 
 ## Sequence Diagram
-- Provide a sequence diagram that outlines the interactions between different components of the system.
+- A sequence diagram that outlines the interactions between different components of the system.
 <p style="align:center">
     <img src="work/work.png">
 </p>
