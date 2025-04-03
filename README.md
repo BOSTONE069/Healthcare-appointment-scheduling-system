@@ -107,7 +107,7 @@ A **full-stack web application** built with **Django REST Framework (DRF)** and 
     ```
 - Ashown in the screenshot below
 <p style="align:center">
-    <img src="api.PNG">
+    <img src="apis.PNG">
 </p>
 
 ## Database Schema Diagram
