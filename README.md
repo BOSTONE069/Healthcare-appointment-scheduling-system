@@ -56,32 +56,55 @@ A **full-stack web application** built with **Django REST Framework (DRF)** and 
    git clone https://github.com/your-repo/Healthcare-appointment-scheduling-system.git
    cd backend
    ```
-## Setup Instructions
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/BOSTONE069/Healthcare-appointment-scheduling-system
-   ```
-2. Navigate to the project directory:
+2. Create and activate virtual environment
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use: venv\Scripts\activate
+    ```
+
+3. Navigate to the project directory:
    ```bash
    cd Healthcare-appointment-scheduling-system
    ```
-3. Install the required packages:
+4. Install the required packages:
    ```bash
-   `pip install virtualenv`
-   `myenv\Scripts\activate.bat` or `source myenv/bin/activate`
-   `pip install -r requirements.txt`
+   pip install -r requirements.txt
    ```
-4. Set up the environment variables in a `.env` file.
-5. Run the migrations:
+5. Set up the environment variables in a `.env` file.
+6. Run the migrations:
    ```bash
    python manage.py migrate
    ```
-6. Start the development server:
+7. Create superuser
+    ```bash
+    python manage.py createsuperuser
+    ```
+
+8. Start the development server:
    ```bash
    python manage.py runserver
 
+### **Front End (React)**
+
+1. Navigate to the project directory:
+    ```bash
+    cd healthcare-frontend
+    ```
+
+2. Install dependencies
+    ```bash
+    npm install
+    ```
+3. Start development server
+    ```bash
+    npm start
+    ```
+
 ## API Documentation
-- Access the documentation through `http://127.0.0.1:8000/swagger/`
+- API documentation is available via Swagger UI:
+    ```bash
+    http://127.0.0.1:8000/swagger/
+    ```
 
 ## Database Schema Diagram
 - A diagram that illustrates the database schema, showing the relationships between different models.
@@ -95,3 +118,37 @@ A **full-stack web application** built with **Django REST Framework (DRF)** and 
 <p style="align:center">
     <img src="out/work/work.png">
 </p>
+## ⚙️ Configuration
+
+### Environment Variables
+
+Create a `.env` file in your backend directory with the following variables:
+
+```ini
+# Django Settings
+DEBUG=True
+SECRET_KEY=your-django-secret-key
+ALLOWED_HOSTS=localhost,127.0.0.1
+
+# Database Configuration (PostgreSQL)
+DATABASE_URL=postgres://username:password@localhost:5432/healthcare_db
+
+# Email Settings (for notifications)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_HOST_USER=your-email@gmail.com
+EMAIL_HOST_PASSWORD=your-email-password
+EMAIL_USE_TLS=True
+DEFAULT_FROM_EMAIL=Healthcare System <noreply@healthcare.com>
+
+# JWT Authentication
+JWT_SECRET_KEY=your-jwt-secret-key
+ACCESS_TOKEN_LIFETIME=14400  # 4 hours
+REFRESH_TOKEN_LIFETIME=2592000  # 30 days
+
+# Frontend URL (for CORS)
+FRONTEND_URL=http://localhost:3000
+
+# Celery (for async tasks)
+CELERY_BROKER_URL=redis://localhost:6379/0
+```
