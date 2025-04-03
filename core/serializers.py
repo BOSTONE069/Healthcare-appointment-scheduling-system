@@ -6,6 +6,7 @@ from .models import Patient, Doctor, Appointment, MedicalRecord
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        ref_name = "UserSerializerCore"
         fields = ['id', 'username', 'email']
 
 # Patient Serializer

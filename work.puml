@@ -1,0 +1,10 @@
+@startuml
+component "Models" as models
+component "Views" as views
+component "Templates" as templates
+component "URLs" as urls
+
+models --> views : Query data
+views --> templates : Render
+urls --> views : Route requests
+@enduml

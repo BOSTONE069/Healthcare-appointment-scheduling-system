@@ -15,6 +15,9 @@
 
 ## Sequence Diagram
 - Provide a sequence diagram that outlines the interactions between different components of the system.
+<p style="align:center">
+    <img src="work/work.png">
+</p>
 
 ## Setup Instructions
 1. Clone the repository:

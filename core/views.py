@@ -35,6 +35,7 @@ class MedicalRecordViewSet(viewsets.ModelViewSet):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        ref_name = "UserSerializerViews"
         fields = ['username', 'password', 'email']
 
     def create(self, validated_data):
@@ -47,5 +48,3 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
-
-    
