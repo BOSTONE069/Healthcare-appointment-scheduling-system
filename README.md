@@ -1,10 +1,17 @@
 # Project Title
 
+
+
+
 ## API Documentation
 - Provide details about the API endpoints, request/response formats, and authentication methods.
 
 ## Database Schema Diagram
 - Include a diagram that illustrates the database schema, showing the relationships between different models.
+
+<p style="align:center">
+    <img src="DATABASE SCHEMA.png">
+</p>
 
 ## Sequence Diagram
 - Provide a sequence diagram that outlines the interactions between different components of the system.
@@ -12,15 +19,17 @@
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/BOSTONE069/Healthcare-appointment-scheduling-system
    ```
 2. Navigate to the project directory:
    ```bash
-   cd <project-directory>
+   cd Healthcare-appointment-scheduling-system
    ```
 3. Install the required packages:
    ```bash
-   pip install -r requirements.txt
+   `pip install virtualenv`
+   `myenv\Scripts\activate.bat` or `source myenv/bin/activate`
+   `pip install -r requirements.txt`
    ```
 4. Set up the environment variables in a `.env` file.
 5. Run the migrations:
