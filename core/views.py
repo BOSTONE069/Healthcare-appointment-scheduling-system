@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework import serializers
+from drf_yasg.utils import swagger_auto_schema
 
 # Patient ViewSet
 class PatientViewSet(viewsets.ModelViewSet):
@@ -46,3 +47,5 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+
+    

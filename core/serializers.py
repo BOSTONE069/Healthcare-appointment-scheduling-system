@@ -16,6 +16,19 @@ class PatientSerializer(serializers.ModelSerializer):
         model = Patient
         fields = '__all__'
 
+    def create(self, validated_data):
+        # Extract the user data from the validated data
+        user_data = validated_data.pop('user')
+
+        # Create the User object first
+        user = User.objects.create(**user_data)
+
+        # Create the Patient object using the newly created user
+        patient = Patient.objects.create(user=user, **validated_data)
+
+        return patient
+
+
 # Doctor Serializer
 class DoctorSerializer(serializers.ModelSerializer):
     user = UserSerializer()
