@@ -23,7 +23,7 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="HEALTH SYSTEM APIS",
+      title="HEALTH APPOINTMENT SCHEDULING SYSTEM APIS",
       default_version='v1',
       description="Api for the Scheduling appointments",
       terms_of_service="https://www.google.com/policies/terms/",

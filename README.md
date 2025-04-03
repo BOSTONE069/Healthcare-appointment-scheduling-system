@@ -105,6 +105,10 @@ A **full-stack web application** built with **Django REST Framework (DRF)** and 
     ```bash
     http://127.0.0.1:8000/swagger/
     ```
+- Ashown in the screenshot below
+<p style="align:center">
+    <img src="api.PNG">
+</p>
 
 ## Database Schema Diagram
 - A diagram that illustrates the database schema, showing the relationships between different models.
@@ -180,6 +184,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📧 Contact
 
-**OCHIENG BOSTONE** 
+**OCHIENG BOSTONE**
 
 Project Link: [https://github.com/BOSTONE069/Healthcare-appointment-scheduling-system](https://github.com/BOSTONE069/Healthcare-appointment-scheduling-system)
