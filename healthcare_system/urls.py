@@ -21,6 +21,9 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+# The `schema_view` variable is being assigned the result of calling the `get_schema_view` function.
+# This function is used in Django Rest Framework to generate a schema view for API documentation using
+# the `drf_yasg` package.
 schema_view = get_schema_view(
    openapi.Info(
       title="HEALTH APPOINTMENT SCHEDULING SYSTEM APIS",
