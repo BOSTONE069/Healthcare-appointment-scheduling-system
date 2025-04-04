@@ -3,10 +3,14 @@ from .models import Patient, Doctor, Appointment, MedicalRecord
 from .serializers import PatientSerializer, DoctorSerializer, AppointmentSerializer, MedicalRecordSerializer
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
-from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework import serializers
-from drf_yasg.utils import swagger_auto_schema
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from .models import Appointment
+from .serializers import AppointmentSerializer
+from .tasks import send_appointment_email
 
 # Patient ViewSet
 class PatientViewSet(viewsets.ModelViewSet):
@@ -48,3 +52,21 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def book_appointment(request):
+    serializer = AppointmentSerializer(data=request.data)
+    if serializer.is_valid():
+        appointment = serializer.save(patient=request.user)
+
+        # Trigger Celery Task
+        send_appointment_email.delay(
+            request.user.email,
+            appointment.doctor.user.username,
+            appointment.appointment_time
+        )
+
+        return Response({"message": "Appointment booked successfully!"}, status=201)
+    return Response(serializer.errors, status=400)
