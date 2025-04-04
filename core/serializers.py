@@ -38,6 +38,22 @@ class DoctorSerializer(serializers.ModelSerializer):
         model = Doctor
         fields = '__all__'
 
+    def create(self, validated_data):
+        # Extract the user data from the validated data
+        user_data = validated_data.pop('user')
+
+        # Create the User object first
+        user = User.objects.create_user(
+            username=user_data['username'],
+            email=user_data['email'],
+            password=user_data.get('password', 'defaultpassword')
+        )
+
+        # Create the Doctor object using the newly created user
+        doctor = Doctor.objects.create(user=user, **validated_data)
+
+        return doctor
+
 # Appointment Serializer
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:

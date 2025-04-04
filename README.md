@@ -54,7 +54,7 @@ A **full-stack web application** built with **Django REST Framework (DRF)** and 
 1. Clone the repo:
    ```sh
    git clone https://github.com/your-repo/Healthcare-appointment-scheduling-system.git
-   cd backend
+   cd Healthcare-appointment-scheduling-system
    ```
 2. Create and activate virtual environment
     ```bash
