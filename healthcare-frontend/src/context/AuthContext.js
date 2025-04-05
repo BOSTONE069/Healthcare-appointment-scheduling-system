@@ -6,11 +6,24 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [authTokens, setAuthTokens] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
-  );
+  const [authTokens, setAuthTokens] = useState(() => {
+    try {
+      const tokens = localStorage.getItem("authTokens");
+      return tokens ? JSON.parse(tokens) : null;
+    } catch (error) {
+      console.error("Error reading authTokens:", error);
+      return null;
+    }
+  });
+
+  // Sync authTokens to localStorage
+  useEffect(() => {
+    if (authTokens) {
+      localStorage.setItem("authTokens", JSON.stringify(authTokens));
+    } else {
+      localStorage.removeItem("authTokens");
+    }
+  }, [authTokens]);
 
   useEffect(() => {
     if (authTokens) {
