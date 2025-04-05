@@ -84,6 +84,11 @@ A **full-stack web application** built with **Django REST Framework (DRF)** and 
    ```bash
    python manage.py runserver
 
+9. Start Celery worker:
+    ```bash
+    celery -A healthcare_system worker -l info
+    ```
+
 ### **Front End (React)**
 
 1. Navigate to the project directory:
@@ -105,13 +110,77 @@ A **full-stack web application** built with **Django REST Framework (DRF)** and 
     ```bash
     http://127.0.0.1:8000/swagger/
     ```
-- Ashown in the screenshot below
+
+### Authentication
+- `POST /registrations/` - Register new user
+- `POST /api/token/` - Obtain JWT tokens (login)
+
+### Patients
+- `GET /patients/` - List all patients
+- `POST /patients/` - Create new patient
+- `GET /patients/{id}/` - Retrieve patient details
+- `PUT /patients/{id}/` - Update patient
+- `DELETE /patients/{id}/` - Delete patient
+
+### Doctors
+- `GET /doctors/` - List all doctors
+- `POST /doctors/` - Create new doctor
+- `GET /doctors/{id}/` - Retrieve doctor details
+- `PUT /doctors/{id}/` - Update doctor
+- `DELETE /doctors/{id}/` - Delete doctor
+
+### Appointments
+- `GET /appointments/` - List all appointments
+- `POST /appointments/` - Create new appointment
+- `POST /book-appointment/` - Special endpoint for booking appointments
+- `GET /appointments/{id}/` - Retrieve appointment details
+- `PUT /appointments/{id}/` - Update appointment
+- `DELETE /appointments/{id}/` - Delete appointment
+
+### Medical Records
+- `GET /medical-records/` - List all medical records
+- `POST /medical-records/` - Create new record
+- `GET /medical-records/{id}/` - Retrieve record details
+- `PUT /medical-records/{id}/` - Update record
+- `DELETE /medical-records/{id}/` - Delete record
+
+- As shown in the screenshot below
 <p style="align:center">
     <img src="apis.PNG">
 </p>
 
 ## Database Schema Diagram
 - A diagram that illustrates the database schema, showing the relationships between different models.
+## Data Models
+
+### User
+- `username` - Unique identifier
+- `email` - Email address
+- `password` - Hashed password
+
+### Patient
+- `user` - OneToOne to User
+- `phone` - Contact number
+- `insurance_number` - Insurance identifier
+- `created_at` - Timestamp
+
+### Doctor
+- `user` - OneToOne to User
+- `specialization` - Medical specialty
+- `available_from` - Start of availability
+- `available_to` - End of availability
+
+### Appointment
+- `patient` - ForeignKey to Patient
+- `doctor` - ForeignKey to Doctor
+- `appointment_time` - Scheduled datetime
+- `status` - Pending/Confirmed/Cancelled
+
+### MedicalRecord
+- `patient` - ForeignKey to Patient
+- `appointment` - ForeignKey to Appointment
+- `notes` - Medical notes
+- `created_at` - Timestamp
 
 <p style="align:center">
     <img src="DATABASE SCHEMA 2.png">
@@ -160,6 +229,22 @@ CELERY_BROKER_URL=redis://localhost:6379/0
 EMAIL_HOST_USER=your email
 EMAIL_HOST_PASSWORD=your password
 ```
+
+## Authentication Flow
+1. User registers via `/registrations/`
+2. User logs in via `/api/token/` to get JWT
+3. JWT included in Authorization header for protected endpoints
+4. Tokens automatically refreshed when expired
+
+## Error Handling
+- 400 Bad Request - Invalid input data
+- 401 Unauthorized - Missing/invalid credentials
+- 403 Forbidden - Insufficient permissions
+- 404 Not Found - Resource doesn't exist
+- 500 Server Error - Internal server error
+
+## Celery Tasks
+- `send_appointment_email` - Sends confirmation email when appointment is booked
 
 ## 🤝 Contributing
 

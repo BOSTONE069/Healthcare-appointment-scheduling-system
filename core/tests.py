@@ -1,12 +1,6 @@
 from django.test import TestCase
 from .models import Doctor, Appointment, Patient, MedicalRecord
 from django.contrib.auth.models import User
-from .factories import (
-    PatientFactory,
-    DoctorFactory,
-    AppointmentFactory,
-    MedicalRecordFactory
-)
 from django.urls import reverse
 from rest_framework.test import APIClient, APITestCase
 from rest_framework import status
@@ -69,7 +63,7 @@ class DoctorModelTest(TestCase):
     def test_create_doctor_with_valid_data(self):
         user = User.objects.create_user(
             username='dr_smith',
-            email='dr.smith@example.com',
+            email='dr.smith@gmail.com',
             password='password123'
         )
         doctor = Doctor.objects.create(
@@ -87,7 +81,7 @@ class AppointmentModelTest(TestCase):
     def setUp(self):
         self.patient_user = User.objects.create_user(
             username='patient1',
-            email='patient1@example.com',
+            email='patient1@gmail.com',
             password='password123'
         )
         self.patient = Patient.objects.create(
@@ -97,7 +91,7 @@ class AppointmentModelTest(TestCase):
         )
         self.doctor_user = User.objects.create_user(
             username='doctor1',
-            email='doctor1@example.com',
+            email='doctor1@gmail.com',
             password='password123'
         )
         self.doctor = Doctor.objects.create(
@@ -124,7 +118,7 @@ class MedicalRecordModelTest(TestCase):
         # Create test data similar to AppointmentModelTest
         self.patient_user = User.objects.create_user(
             username='patient1',
-            email='patient1@example.com',
+            email='patient1@gmail.com',
             password='password123'
         )
         self.patient = Patient.objects.create(
@@ -134,7 +128,7 @@ class MedicalRecordModelTest(TestCase):
         )
         self.doctor_user = User.objects.create_user(
             username='doctor1',
-            email='doctor1@example.com',
+            email='doctor1@gmail.com',
             password='password123'
         )
         self.doctor = Doctor.objects.create(
@@ -165,7 +159,7 @@ class APITests(APITestCase):
         self.client = APIClient()
         self.admin_user = User.objects.create_superuser(
             username='admin',
-            email='admin@example.com',
+            email='admin@gmail.com',
             password='adminpass'
         )
         self.client.force_authenticate(user=self.admin_user)
@@ -175,7 +169,7 @@ class APITests(APITestCase):
         data = {
             'user': {
                 'username': 'testpatient',
-                'email': 'patient@example.com',
+                'email': 'patient@gmail.com',
                 'password': 'testpass123'
             },
             'phone': '9876543210',
@@ -189,7 +183,7 @@ class APITests(APITestCase):
         data = {
             'user': {
                 'username': 'testdoctor',
-                'email': 'doctor@example.com',
+                'email': 'doctor@gmail.com',
                 'password': 'testpass123'
             },
             'specialization': 'Pediatrics',
@@ -210,7 +204,7 @@ class APITests(APITestCase):
         # Create required patient and doctor first
         patient_user = User.objects.create_user(
             username='aptpatient',
-            email='aptpatient@example.com',
+            email='aptpatient@gmail.com',
             password='testpass123'
         )
         patient = Patient.objects.create(
@@ -220,7 +214,7 @@ class APITests(APITestCase):
         )
         doctor_user = User.objects.create_user(
             username='aptdoctor',
-            email='aptdoctor@example.com',
+            email='aptdoctor@gmail.com',
             password='testpass123'
         )
         doctor = Doctor.objects.create(
@@ -244,7 +238,7 @@ class APITests(APITestCase):
         # Create test doctor
         doctor_user = User.objects.create_user(
             username='bookdoctor',
-            email='bookdoctor@example.com',
+            email='bookdoctor@gmail.com',
             password='testpass123'
         )
         doctor = Doctor.objects.create(
@@ -257,7 +251,7 @@ class APITests(APITestCase):
         # Create test patient user and authenticate
         patient_user = User.objects.create_user(
             username='bookpatient',
-            email='bookpatient@example.com',
+            email='bookpatient@gmail.com',
             password='testpass123'
         )
         self.client.force_authenticate(user=patient_user)

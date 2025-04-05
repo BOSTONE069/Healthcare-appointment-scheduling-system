@@ -18,7 +18,7 @@ class AppointmentAdmin(admin.ModelAdmin):
 # The `MedicalRecordAdmin` class defines a Django admin interface with specified fields for displaying
 # patient medical records.
 class MedicalRecordAdmin(admin.ModelAdmin):
-    list_display = ('patient', 'appointment', 'created_at')
+    list_display = ('patient', 'appointment', 'notes', 'created_at')
 
 admin.site.register(Patient, PatientAdmin)
 admin.site.register(Doctor, DoctorAdmin)
