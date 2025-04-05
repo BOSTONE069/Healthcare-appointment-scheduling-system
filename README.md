@@ -114,7 +114,7 @@ A **full-stack web application** built with **Django REST Framework (DRF)** and 
 - A diagram that illustrates the database schema, showing the relationships between different models.
 
 <p style="align:center">
-    <img src="DATABASE SCHEMA.png">
+    <img src="DATABASE SCHEMA 2.png">
 </p>
 
 ## Sequence Diagram
@@ -155,6 +155,10 @@ FRONTEND_URL=http://localhost:3000
 
 # Celery (for async tasks)
 CELERY_BROKER_URL=redis://localhost:6379/0
+
+#Email Configurations
+EMAIL_HOST_USER=your email
+EMAIL_HOST_PASSWORD=your password
 ```
 
 ## 🤝 Contributing
